@@ -1,0 +1,109 @@
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Vue.js Tutorial | API Example</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+	jQuery(function($) {
+		
+	});
+	</script>	
+    <style> 
+    
+    #app {
+  height: 100vh;
+  width: 100vw;
+}
+#submit-form {
+  margin-top: 40px;
+}
+.lead-form {
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 5px;
+  padding: 10px 50px 30px 50px;
+  margin-top: 100px;
+}
+span.city-span {
+  color: (#444);
+  text-transform: uppercase;
+  margin-left: 5px;
+  margin-top: 10px;
+}
+.form-control {
+  margin-bottom: 3px;
+}
+    </style>
+    
+    
+  </head>
+
+  <body>
+  <nav  style="background-color:#333" class="navbar navbar-dark bg-inverse">
+  <a class="navbar-brand" style="color:white" href="#">Pesquisa API ALMG</a>
+</nav>
+    <div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3">
+            <div class="lead-form">
+			<img src="https://www.almg.gov.br/export/system/modules/br.gov.almg.site.portal/resources/img/logo.png">
+              <hr />
+              <div class="row">
+                
+                  <form action="checkout-sample" method="POST">
+				  <div class="col-md-3">
+   Nome Fornecedor <input type="text" class="form-control" name="nome" id="nome" />
+   </div>
+   <div class="col-md-3">
+   Código Dotação <input type="text" class="form-control" name="dotacao" id="dotacao" />
+   </div>
+   <div class="col-md-3">
+   Tipo de Contrato <input type="text" class="form-control" name="tipo" id="tipo" />
+   </div>
+   <div class="col-md-6">
+   Código do Contrato <input type="text" class="form-control" name="codigo" id="codigo" />
+   </div>
+   <div class="col-md-3">
+   Ano <input type="text" class="form-control" name="ano" id="ano" />
+   </div>
+   </form>
+   <script type="text/javascript">
+jQuery(function($){
+   $("#nome").change(function(){
+      var contrato_code = $(this).val();
+      if( contrato_code.length <= 0 ) return;
+      $.get("http://dadosabertos.almg.gov.br/ws/prestacao_contas/contratos/indexados", { nomeFornecedor: contrato_code },
+         function(result){
+            if( result.status!=1 ){
+               alert(result.message || "Houve um erro desconhecido");
+               return;
+            }
+            $("input#nome").val( result.nomeFornecedor );
+			$("input#dotacao").val( result.codDotacaoOrcamentaria );
+			$("input#tipo").val( result.tipoDocumentoContrato );
+			$("input#codigo").val( result.codDocumentoContrato );
+			$("input#ano").val( result.anoDocumentoContrato );
+			
+			
+         });
+   });
+});
+</script>
+                
+              </div>
+            </div><!-- end of .lead-form -->
+          </div> <!-- end of .col-md-6.col-md-offset-3 -->
+        </div> <!-- end of .row -->
+      </div> <!-- end of .container -->
+    </div> <!-- end of #app -->
+		  </body>
+
+  
+</html>
